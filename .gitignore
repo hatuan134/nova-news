@@ -1,0 +1,14 @@
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+wordpress/wp-content/uploads/
+backups/
+# Ảnh minh chứng và báo cáo được lưu ngoài repository
+screenshots/
+minh-chung/
+bao-cao/

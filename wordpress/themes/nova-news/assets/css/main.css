@@ -1,0 +1,253 @@
+:root{--ink:#171d24;--muted:#677179;--line:#e7e9ea;--paper:#fff;--soft:#f5f6f5;--navy:#0c1c30;--accent:#e55b39;--font:Arial,Helvetica,sans-serif;--serif:Georgia,'Times New Roman',serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:var(--paper);font-family:var(--font);-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}button,input{font:inherit}button{cursor:pointer}img{max-width:100%;height:auto;display:block}h1,h2,h3,p{margin-top:0}p{line-height:1.7}.container{max-width:1240px;margin:auto;padding-left:28px;padding-right:28px}.skip-link{position:absolute;top:-60px;left:20px;background:white;padding:12px;z-index:99}.skip-link:focus{top:5px}.top-strip{background:var(--navy);color:#c3cbd4;font-size:10px;font-weight:700;letter-spacing:1.75px}.top-strip-inner{height:32px;display:flex;justify-content:space-between;align-items:center}.live-dot,.red-pulse{display:inline-block;width:6px;height:6px;background:var(--accent);border-radius:50%;vertical-align:middle;margin-right:8px}.site-header{position:relative;z-index:10;background:#fff}.header-main{height:105px;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;gap:14px;align-items:center}.brand-mark{display:grid;place-items:center;height:57px;width:57px;color:white;background:var(--navy);font-family:var(--serif);font-weight:bold;font-size:37px;letter-spacing:-6px;border-radius:4px}.brand-mark span{color:var(--accent);font-size:15px;align-self:end;letter-spacing:0;padding-bottom:7px}.brand-copy strong{display:block;letter-spacing:-1.7px;font-size:28px;font-weight:900}.brand-copy strong span{color:var(--accent)}.brand-copy small{display:block;font-size:8px;font-weight:bold;letter-spacing:3px;color:#7c868e;margin-top:1px}.header-date{font-size:12px;letter-spacing:1.2px;font-weight:700;text-transform:uppercase;color:#727c84}.header-nav-wrap{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.nav-layout{display:flex;align-items:center;justify-content:space-between}.nav-list{display:flex;gap:38px;align-items:center;margin:0;padding:0;list-style:none;min-height:52px}.nav-list a{font-size:12px;letter-spacing:.55px;text-transform:uppercase;font-weight:800;transition:color .2s}.nav-list a:hover,.nav-list .current-menu-item>a,.nav-list .current-cat>a{color:var(--accent)}.search-trigger{border:0;background:transparent;padding:10px}.search-trigger svg{height:19px;width:19px;stroke:currentColor;stroke-width:1.8;fill:none}.search-panel{padding-top:14px;padding-bottom:14px}.search-panel[hidden]{display:none}.search-form{display:flex;gap:8px}.search-form input{flex:1;min-width:0;padding:13px 16px;border:1px solid var(--line);outline-color:var(--accent)}.search-form button,.pill-btn{display:inline-block;background:var(--navy);color:white;border:0;padding:14px 21px;font-size:12px;font-weight:800;letter-spacing:.5px}.mobile-toggle{display:none}.intro-block{padding-top:57px;padding-bottom:25px}.intro-badge,.section-kicker{font-size:10px;letter-spacing:2.4px;color:var(--accent);font-weight:900}.intro-grid{display:grid;grid-template-columns:1.45fr .55fr;gap:50px;align-items:end;margin-top:16px}.intro-grid h1{font-family:var(--serif);font-size:clamp(54px,6.5vw,93px);line-height:1.03;letter-spacing:-4.5px;margin:0;font-weight:700}.intro-grid h1 em,.section-heading h2 em,.newsletter-block h2 em{font-weight:400}.orange-period{color:var(--accent)}.intro-aside{padding-bottom:8px}.intro-aside p{max-width:300px;color:var(--muted);font-size:14px;line-height:1.9}.text-arrow{display:inline-flex;align-items:center;gap:32px;font-size:12px;font-weight:800;border-bottom:1px solid #aeb7bd;padding-bottom:12px;margin-top:12px}.text-arrow span{color:var(--accent);font-size:20px}.divider-line{border-top:1px solid #aeb3b8;margin-top:49px;padding-top:16px;display:flex;justify-content:space-between;color:#68727a;font-size:9px;font-weight:800;letter-spacing:1.65px}.lead-layout{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(290px,1fr);gap:35px;padding-top:15px}.lead-image{display:block;position:relative;aspect-ratio:1.67;overflow:hidden;background:#dbe4e7}.lead-image img,.story-thumb img,.mini-story-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .35s}.lead-image:hover img,.story-thumb:hover img,.mini-story-thumb:hover img{transform:scale(1.04)}.lead-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#101f30 5%,#4c697d 48%,#e0d0bd 100%);font-family:var(--serif);font-size:150px;color:rgba(255,255,255,.82);letter-spacing:-15px}.lead-placeholder span{font-size:62px;letter-spacing:0;color:#eb6b49}.lead-image-tag{position:absolute;bottom:0;left:0;background:var(--accent);color:#fff;font-size:10px;font-weight:800;letter-spacing:1.4px;padding:12px 18px}.lead-content{padding:25px 0}.eyebrow{display:inline-block;color:var(--accent);font-weight:900;font-size:10px;letter-spacing:1.7px;text-transform:uppercase}.lead-content h2{font:700 clamp(29px,3vw,43px)/1.18 var(--serif);letter-spacing:-1.25px;margin:12px 0}.lead-content h2 a:hover,.story-copy h3 a:hover,.mini-story h3 a:hover{color:var(--accent)}.lead-content p{font-size:14px;color:var(--muted);line-height:1.9;max-width:720px;margin-bottom:16px}.story-meta{font-size:11px;color:#879098}.meta-dot{margin:0 7px}.lead-sidebar{border-left:1px solid var(--line);padding-left:28px}.side-heading{display:flex;justify-content:space-between;align-items:center;padding:0 0 23px;font-size:11px;font-weight:900;letter-spacing:2.3px}.small-arrow{font-size:18px;color:var(--accent)}.mini-story{border-top:1px solid var(--line);padding:20px 0;display:grid;grid-template-columns:115px 1fr;gap:17px}.mini-story-thumb{width:115px;height:103px;display:block;overflow:hidden;background:#d4dce2}.mini-story h3{font:700 17px/1.3 var(--serif);letter-spacing:-.2px;margin:7px 0}.mini-story .eyebrow{font-size:9px}.thumb-placeholder{display:grid;place-items:center;background:linear-gradient(135deg,#c6d3d8,#8198a3 55%,#243f54);height:100%;color:white}.thumb-placeholder span{font:700 30px var(--serif)}.side-note{margin-top:16px;padding:25px;background:#f5f4f1}.side-note-icon{color:var(--accent);font-size:34px;display:block;margin-bottom:10px}.side-note strong{font:700 20px var(--serif)}.side-note p{font-size:12px;color:#758087;margin-top:8px;margin-bottom:0}.section-news{padding-top:100px;padding-bottom:75px}.section-heading{display:flex;justify-content:space-between;align-items:end;border-bottom:1px solid #b5bec4;padding-bottom:20px;margin-bottom:30px}.section-heading h2{font:700 clamp(34px,4vw,51px)/1.13 var(--serif);letter-spacing:-1.6px;margin:12px 0 0}.section-count{font-size:10px;color:#919ba3;letter-spacing:1.5px}.story-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:44px 28px}.story-thumb{display:block;aspect-ratio:1.47;overflow:hidden;background:#cbd9df}.story-copy{padding-top:20px}.story-copy h3{font:700 23px/1.3 var(--serif);letter-spacing:-.4px;margin:10px 0}.story-copy p{font-size:13px;line-height:1.75;color:var(--muted);margin:0 0 14px}.newsletter-block{background:var(--navy);color:#fff;min-height:220px;padding-top:37px;padding-bottom:36px;display:flex;align-items:end;justify-content:space-between;gap:30px}.newsletter-block>div>span{font-size:10px;font-weight:800;letter-spacing:2.5px;color:#f9a18d}.newsletter-block h2{font:700 clamp(30px,3.8vw,50px)/1.1 var(--serif);letter-spacing:-1px;margin:14px 0 0}.newsletter-block p{color:#b7c4cf;font-size:12px;margin-left:auto}.round-arrow{height:60px;width:60px;flex-shrink:0;display:grid;place-items:center;border-radius:50%;background:var(--accent);font-size:28px}.section-categories{padding-top:95px;padding-bottom:110px}.category-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.category-tile{min-height:143px;background:#f3f5f5;padding:22px 25px;display:flex;flex-direction:column;justify-content:space-between;position:relative;transition:background .2s,transform .2s}.category-tile:hover{background:#e3ebef;transform:translateY(-3px)}.category-no{font-size:10px;letter-spacing:2px;color:#9aa4a9}.category-tile strong{font:700 23px var(--serif)}.category-arrow{position:absolute;right:20px;bottom:20px;color:var(--accent);font-size:24px}.site-footer{background:#101b29;color:#e6ebf0}.footer-top{display:flex;justify-content:space-between;padding-top:65px;padding-bottom:70px;gap:40px}.footer-brand{font-weight:900;font-size:30px;letter-spacing:-1.3px}.footer-brand span,.footer-brand i{color:var(--accent);font-style:normal}.footer-top p{color:#9cabb9;font-size:13px;margin-top:18px}.footer-links{display:flex;gap:95px}.footer-links>div{display:flex;flex-direction:column;gap:13px}.footer-links h3{font-size:11px;letter-spacing:2px;text-transform:uppercase;margin:0 0 10px}.footer-links a,.footer-links span{font-size:12px;color:#a7b4bd}.footer-bottom{border-top:1px solid #303f4a;padding-top:22px;padding-bottom:25px;display:flex;justify-content:space-between;color:#98a7b3;font-size:11px}.listing-page{padding-top:75px;padding-bottom:100px}.listing-intro{margin-bottom:45px}.listing-intro h1{font:700 clamp(37px,5vw,64px)/1.12 var(--serif);letter-spacing:-2px;margin:18px 0;overflow-wrap:anywhere}.listing-intro p{color:var(--muted)}.pagination{margin-top:48px;text-align:center}.page-numbers{display:inline-block;padding:10px 14px;margin-right:3px;border:1px solid var(--line)}.page-numbers.current{background:var(--navy);color:white}.no-results{padding:50px;background:var(--soft);color:#606b74;grid-column:1/-1}.empty-feature{margin-top:20px;display:grid;grid-template-columns:160px 1fr;gap:35px;align-items:center;background:#e8eced;padding-top:75px;padding-bottom:75px}.empty-number{font:800 160px var(--serif);color:#b1bdc4;line-height:1}.empty-feature h2{font:700 45px/1.15 var(--serif);margin:12px 0}.empty-feature p{color:#65717b;max-width:600px}.article-page{padding-top:45px;padding-bottom:90px}.article-body{max-width:950px;margin:0 auto}.article-head{max-width:785px;margin:0 auto 32px}.breadcrumbs{display:flex;gap:12px;color:#8e989e;font-size:12px;margin-bottom:32px}.article-head h1{font:700 clamp(40px,5.5vw,68px)/1.1 var(--serif);letter-spacing:-2.3px;margin:20px 0}.article-deck{font-size:19px;line-height:1.7;color:#606e78}.article-info{border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;gap:20px;font-size:12px;color:#78838d;align-items:center}.article-info strong,.article-info span{display:block}.article-info strong{color:#24313c;margin-bottom:5px}.article-cover{margin:30px 0 40px}.article-cover img{width:100%;height:auto;max-height:620px;object-fit:cover}.article-cover figcaption{font-size:11px;color:#80909b;text-align:center;margin-top:12px}.prose{max-width:785px;margin:0 auto;color:#313840;font:18px/1.95 var(--serif)}.prose h2,.prose h3{font-family:var(--font);line-height:1.4;margin-top:35px}.prose a{color:var(--accent);text-decoration:underline}.prose figure{max-width:100%;margin:25px auto}.prose blockquote{padding:12px 25px;border-left:4px solid var(--accent);background:#f6f6f4;margin:20px 0}.article-end{max-width:785px;margin:48px auto 0;border-top:1px solid var(--line);padding-top:24px;display:flex;justify-content:space-between;font-size:12px;font-weight:900}.article-end span{color:var(--accent)}.related-section{padding-top:100px}
+@media(max-width:1100px){.nav-list{gap:21px}.lead-layout{grid-template-columns:1.5fr 1fr;gap:20px}.lead-sidebar{padding-left:20px}.mini-story{grid-template-columns:90px 1fr}.mini-story-thumb{width:90px;height:85px}.mini-story h3{font-size:15px}.story-grid{gap:35px 20px}}
+@media(max-width:800px){.container{padding-left:19px;padding-right:19px}.header-main{height:83px}.intro-grid{grid-template-columns:1fr;gap:18px}.intro-grid h1{font-size:clamp(49px,9vw,76px)}.intro-aside p{max-width:500px}.divider-line{margin-top:30px}.lead-layout{grid-template-columns:1fr}.lead-sidebar{border-left:0;border-top:1px solid var(--line);padding:20px 0 0}.lead-sidebar .mini-story{grid-template-columns:120px 1fr}.lead-sidebar .mini-story-thumb{height:95px;width:120px}.story-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.category-grid{grid-template-columns:repeat(2,1fr)}.newsletter-block{flex-wrap:wrap}.newsletter-block p{margin-left:0}.header-date{display:none}.mobile-toggle{display:grid;gap:4px;border:0;background:transparent;padding:8px}.mobile-toggle span{width:22px;height:2px;background:#233040}.header-nav-wrap{position:relative}.nav-layout{height:48px}.primary-nav{display:none;position:absolute;background:white;left:0;right:0;top:48px;box-shadow:0 8px 18px #0002;padding:18px 20px}.primary-nav.is-open{display:block}.nav-list{display:flex;flex-direction:column;align-items:start;gap:18px;min-height:0}.brand-copy strong{font-size:25px}.footer-links{gap:34px}}
+@media(max-width:560px){.top-strip-inner span:last-child{display:none}.intro-block{padding-top:40px}.intro-grid h1{font-size:51px;letter-spacing:-2.6px}.intro-aside{padding-top:2px}.divider-line span:last-child{display:none}.lead-content h2{font-size:34px}.story-grid{grid-template-columns:1fr}.section-news,.section-categories{padding-top:62px;padding-bottom:65px}.section-count{display:none}.category-grid{grid-template-columns:1fr}.category-tile{min-height:110px}.newsletter-block{gap:6px}.newsletter-block p{width:75%}.footer-top{display:block}.footer-links{margin-top:35px;display:flex;flex-wrap:wrap}.footer-bottom{gap:12px;flex-direction:column}.article-head h1{font-size:40px;letter-spacing:-1px}.article-deck{font-size:16px}.article-info{align-items:start;flex-direction:column}.prose{font-size:17px}.empty-feature{grid-template-columns:1fr;gap:6px}.empty-number{font-size:90px}.empty-feature h2{font-size:35px}}
+/* =========================================
+   FIX FONT TIENG VIET - NOVA NEWS
+========================================= */
+
+/* Su dung font ho tro tieng Viet */
+:root {
+    --serif: "Times New Roman", serif;
+}
+
+/* Sua khoang cach ky tu cho cac tieu de */
+.intro-grid h1,
+.section-heading h2,
+.lead-content h2,
+.mini-story h3,
+.story-copy h3,
+.article-head h1,
+.listing-intro h1,
+.newsletter-block h2,
+.category-tile strong,
+.empty-feature h2 {
+
+    letter-spacing: normal;
+    word-break: normal;
+    overflow-wrap: normal;
+}
+
+/* Can chinh tieu de lon trang chu */
+.intro-grid h1 {
+    font-size: clamp(52px, 6vw, 86px);
+    line-height: 1.14;
+}
+
+/* Toi uu tren dien thoai */
+@media (max-width: 560px) {
+
+    .intro-grid h1 {
+        font-size: clamp(42px, 9.5vw, 51px);
+    }
+
+}
+/* =========================================
+   NOVA NEWS - IMPROVE TEXT READABILITY
+   Tang do de doc cho chu nho
+========================================= */
+
+/* 1. Thanh thong tin tren cung */
+.top-strip {
+    font-size: 11px;
+    letter-spacing: 0.8px;
+}
+
+/* 2. Khau hieu ben duoi logo */
+.brand-copy small {
+    font-size: 10px;
+    letter-spacing: 1.4px;
+    color: #465463;
+}
+
+/* 3. Dong chu CONG THONG TIN DIEN TU */
+.header-date {
+    font-size: 13px;
+    letter-spacing: 0.7px;
+    color: #455262;
+}
+
+/* 4. Menu dieu huong */
+.nav-list a {
+    font-size: 13px;
+    letter-spacing: 0.2px;
+}
+
+/* 5. Cac nhan danh muc va tieu de nho */
+.intro-badge,
+.section-kicker,
+.eyebrow {
+    font-size: 12px;
+    letter-spacing: 1.1px;
+}
+
+/* 6. Dong THOI SU - CONG NGHE - GIAO DUC */
+.divider-line {
+    font-size: 11px;
+    letter-spacing: 0.7px;
+    color: #425260;
+}
+
+/* 7. Tieu de TIEU DIEM */
+.side-heading {
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+/* 8. So thu tu va thong tin phu */
+.section-count {
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    color: #52616d;
+}
+
+.story-meta,
+.category-no {
+    font-size: 12px;
+    letter-spacing: 0.3px;
+    color: #596877;
+}
+
+/* 9. Van ban mo ta */
+.intro-aside p,
+.lead-content p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #485662;
+}
+
+/* 10. Van ban trong cac the tin */
+.story-copy p,
+.side-note p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: #495564;
+}
+
+/* 11. Nhan TIN NOI BAT */
+.lead-image-tag {
+    font-size: 11px;
+    letter-spacing: 0.7px;
+}
+
+/* 12. Toi uu tren dien thoai */
+@media (max-width: 560px) {
+
+    .top-strip {
+        font-size: 10px;
+    }
+
+    .brand-copy small {
+        font-size: 9px;
+        letter-spacing: 0.6px;
+    }
+
+    .divider-line {
+        font-size: 10px;
+    }
+
+}
+/* =========================================
+   NOVA NEWS - FIX VIETNAMESE FONT
+   Dong bo font chu tieng Viet
+========================================= */
+
+/* Font chu chinh cho giao dien */
+:root {
+    --font: "Segoe UI", Arial, sans-serif;
+    --serif: "Times New Roman", Georgia, serif;
+}
+
+/* Dong bo font cho menu va cac nhan */
+.nav-list a,
+.divider-line,
+.intro-badge,
+.section-kicker,
+.eyebrow,
+.side-heading,
+.top-strip,
+.header-date,
+.brand-copy small,
+.section-count,
+.category-no,
+.lead-image-tag {
+
+    font-family: "Segoe UI", Arial, sans-serif;
+
+    /* Su dung do dam co ho tro tot */
+    font-weight: 700;
+
+    /* Khoang cach ky tu dong deu */
+    letter-spacing: 0.04em;
+}
+
+/* Menu dieu huong */
+.nav-list a {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Dong THOI SU - CONG NGHE - GIAO DUC */
+.divider-line {
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* Nhan danh muc */
+.intro-badge,
+.section-kicker,
+.eyebrow {
+    font-size: 12px;
+}
+
+/* Tieu de nho */
+.side-heading {
+    font-size: 13px;
+}
+/* =====================================
+   NOVA NEWS - FIX LOGO
+   Can chinh chu N va ngoi sao
+===================================== */
+
+.brand-mark {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 57px;
+    height: 57px;
+
+    padding-right: 11px;
+
+    background: #0c1c30;
+    border-radius: 4px;
+
+    color: #ffffff;
+
+    font-family: "Times New Roman", Georgia, serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0;
+}
+
+/* Dua ngoi sao sang ben phai chu N */
+.brand-mark > span {
+    position: absolute;
+
+    right: 7px;
+    top: 24px;
+
+    color: #e55b39;
+
+    font-size: 13px;
+    line-height: 1;
+    letter-spacing: 0;
+
+    padding: 0;
+    margin: 0;
+    align-self: auto;
+}
