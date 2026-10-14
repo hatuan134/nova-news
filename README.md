@@ -1,166 +1,161 @@
-# NOVA NEWS — Đề 19: Website tin tức / Cổng thông tin
+# NOVA NEWS – Website Tin tức / Cổng thông tin
 
-**Môn:** Triển khai và Quản trị Hệ thống Phần mềm  
-**Môi trường demo:** Windows 11 + Docker Desktop + Docker Compose  
-**Trạng thái:** Mốc 1 (website, MySQL, phpMyAdmin, Nginx cơ bản). Chưa có hệ thống Prometheus/Grafana/Loki/Promtail; sẽ bổ sung các mốc tiếp theo.
+**Môn học:** Triển khai và Quản trị Hệ thống Phần mềm  
+**Đề tài:** 19 – Website Tin tức / Cổng thông tin  
+**Môi trường:** Windows 11, Docker Desktop, Docker Compose
 
-## 1. Cấu trúc hệ thống mốc 1
+## 1. Giới thiệu
 
-```text
-Browser (http://localhost:8080)
-    |
-    v
-Nginx (:80 trong container)
-    |
-    v
-WordPress (Apache :80 trong container) ----> MySQL (:3306)
-                                               ^
-                                               |
-                    phpMyAdmin (127.0.0.1:8081)
-```
+NOVA NEWS là website tin tức xây dựng bằng WordPress và MySQL. Hệ thống cho phép người dùng đọc, tìm kiếm bài viết theo danh mục và người quản trị quản lý nội dung.
 
-- `nginx`: reverse proxy nhận request và bổ sung security headers cơ bản.
-- `wordpress`: CMS với theme NOVA NEWS tự phát triển.
-- `mysql`: database, **không công bố cổng ra host**.
-- `phpmyadmin`: công cụ quản trị database, chỉ bind cổng localhost trên laptop.
-- `database`: mạng Docker có `internal: true`; WordPress nằm trên cả `frontend` và `database`.
+Dự án sử dụng Docker Compose để triển khai website, Nginx làm Reverse Proxy, Prometheus và Grafana để giám sát, Loki và Promtail để thu thập log tập trung.
 
-## 2. Yêu cầu máy tính
+## 2. Các công nghệ sử dụng
 
-- Windows 11, Docker Desktop bật Linux Containers / WSL 2.
-- Có kết nối internet **khi tải Docker images lần đầu**.
-- Nên dành tối thiểu 5–10 GB trống; dự án cuối cùng sẽ có thêm nhiều dịch vụ.
+| Công nghệ | Chức năng |
+|---|---|
+| WordPress | Xây dựng và quản lý website |
+| MySQL | Lưu trữ dữ liệu |
+| phpMyAdmin | Quản lý cơ sở dữ liệu |
+| Nginx | Reverse Proxy và Security Headers |
+| Docker Compose | Quản lý các dịch vụ container |
+| Prometheus | Thu thập metrics |
+| Grafana | Hiển thị dashboard |
+| cAdvisor | Giám sát tài nguyên container |
+| Nginx Exporter | Giám sát Nginx |
+| MySQL Exporter | Giám sát MySQL |
+| Loki và Promtail | Thu thập và lưu trữ log |
+| LogQL | Truy vấn log |
 
-## 3. Khởi tạo lần đầu (PowerShell)
+Hệ thống gồm 11 dịch vụ được khai báo trong `compose.yaml`.
 
-Mở thư mục `nova-news-starter` bằng **File → Open Folder** trong VS Code. Sau đó Terminal → New Terminal (PowerShell).
+## 3. Hướng dẫn cài đặt và chạy
 
-```powershell
-docker --version
-docker compose version
-git --version
-Copy-Item .env.example .env
-notepad .env
-```
+### 3.1. Yêu cầu
 
-Trong `.env`, sửa **cả hai mật khẩu** thành hai chuỗi dài, độc lập. Có thể tạo từng chuỗi bằng PowerShell:
+Máy tính cần cài đặt Docker Desktop (Linux Containers), Docker Compose và Git. Cần kết nối Internet khi tải Docker images lần đầu.
 
-```powershell
-[Convert]::ToHexString([Security.Cryptography.RandomNumberGenerator]::GetBytes(24))
-```
+### 3.2. Tải mã nguồn
 
-Chạy **hai lần**, dùng mỗi kết quả cho một biến. Không đăng `.env` lên GitHub hoặc chụp màn hình chứa mật khẩu.
+Mở PowerShell và thực hiện:
 
-```powershell
-docker compose config --services
-docker compose pull
-docker compose up -d
-docker compose ps
-```
+`git clone https://github.com/hatuan134/nova-news.git`
 
-Lần đầu có thể phải chờ MySQL khởi tạo 1–3 phút. `docker compose ps` nên hiển thị 4 services `nginx`, `wordpress`, `mysql`, `phpmyadmin` đang chạy; riêng MySQL health hiển thị `healthy`.
+`cd nova-news`
 
-## 4. Cài WordPress trong trình duyệt
+### 3.3. Cấu hình môi trường
 
-1. Vào `http://localhost:8080`.
-2. Nếu hiện trang cài đặt WordPress: chọn ngôn ngữ **Tiếng Việt**, nhập tên website `NOVA NEWS – Cổng thông tin`, tạo admin và mật khẩu mạnh. **Không dùng tên đăng nhập `admin` nếu có lựa chọn tốt hơn.**
-3. Đăng nhập tại `http://localhost:8080/wp-admin`.
-4. Vào **Giao diện → Giao diện (Themes) → Nova News → Kích hoạt**.
-5. Vào **Cài đặt → Đường dẫn tĩnh (Permalinks) → Tên bài viết → Lưu thay đổi**.
-6. Tại **Bài viết → Chuyên mục (Categories)**, tạo: Công nghệ, Giáo dục, Đời sống, Kinh tế, Thể thao, Giải trí.
-7. Tại **Bài viết → Viết bài mới**, tạo ít nhất 6 bài viết của riêng bạn (tiêu đề, nội dung, danh mục, ảnh đại diện nếu có), rồi bấm **Đăng**.
-8. Tại **Giao diện → Menu**, tạo menu các chuyên mục, gán vào vị trí **Menu chính**. Nếu giao diện WP không có mục Menu do phiên bản, có thể dùng menu chuyên mục mặc định do theme hiển thị.
-9. Làm mới `http://localhost:8080`: trang chủ sẽ hiển thị tin nổi bật, tiêu điểm, tin mới và chuyên mục từ **database**.
+Tạo file `.env` từ file mẫu:
 
-Lưu ý: Ảnh thumbnail không bắt buộc để trang trông gọn gàng — giao diện có ảnh gradient dự phòng. Với bài thi, nên tự tải ảnh bạn có quyền sử dụng và ghi rõ nguồn.
+`Copy-Item .env.example .env`
 
-## 5. Kiểm tra MySQL & phpMyAdmin
+Mở `.env` và thiết lập các biến:
 
-1. Mở `http://localhost:8081`.
-2. Đăng nhập bằng tài khoản `MYSQL_USER` và `MYSQL_PASSWORD` trong `.env`, **không dùng tài khoản WordPress**.
-3. Chọn database `nova_news` → bảng `wp_posts` (tiền tố mặc định, có thể khác nếu thay đổi config).
-4. Tab SQL, chạy:
+- `MYSQL_DATABASE`: Tên database.
+- `MYSQL_USER`: Tài khoản WordPress kết nối MySQL.
+- `MYSQL_PASSWORD`: Mật khẩu tài khoản MySQL.
+- `MYSQL_ROOT_PASSWORD`: Mật khẩu quản trị MySQL.
+- `GRAFANA_ADMIN_PASSWORD`: Mật khẩu Grafana.
+- `MYSQL_EXPORTER_PASSWORD`: Mật khẩu tài khoản giám sát MySQL.
 
-```sql
-SELECT ID, post_title, post_status, post_date
-FROM wp_posts
-WHERE post_type = 'post'
-ORDER BY post_date DESC
-LIMIT 10;
-```
+Sử dụng mật khẩu mạnh, không đưa file `.env` lên GitHub.
 
-Kết quả phải có ít nhất một bài viết bạn vừa đăng. Tuyệt đối không sửa trực tiếp bảng khi chưa hiểu ý nghĩa dữ liệu.
+### 3.4. Khởi động các dịch vụ
 
-## 6. Kiểm tra Nginx
+Kiểm tra cấu hình:
 
-```powershell
-curl.exe -I http://localhost:8080
-```
+`docker compose config --quiet`
 
-Mong đợi có `X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, `Referrer-Policy: strict-origin-when-cross-origin`.
+Khởi động các dịch vụ ban đầu:
 
-```powershell
-docker compose exec nginx nginx -t
-```
+`docker compose up -d mysql wordpress nginx phpmyadmin prometheus grafana cadvisor nginx-exporter loki promtail`
 
-Mong đợi kiểm tra cú pháp Nginx thành công. Với bài báo cáo, chụp ảnh hiển thị lệnh + kết quả, không chỉ chụp file cấu hình.
+Kiểm tra trạng thái:
 
-## 7. Kiểm tra tình trạng & xử lý sự cố
+`docker compose ps`
 
-```powershell
-docker compose ps
-docker compose logs --tail=100 mysql
-docker compose logs --tail=100 wordpress
-docker compose logs --tail=100 nginx
-```
+### 3.5. Tạo tài khoản MySQL Exporter
 
-- `Cannot connect to Docker daemon`: mở Docker Desktop, chờ Engine chạy.
-- `port is already allocated`: một phần mềm khác đang dùng 8080 hoặc 8081; kiểm tra tiến trình trước khi đổi cổng. Nếu đổi 8080, đồng thời chỉnh `WP_HOME` và `WP_SITEURL` ở `compose.yaml`.
-- MySQL `unhealthy`: kiểm tra `.env`, logs; lần đầu cần chờ khởi tạo.
-- WordPress không tải được theme: xem container mount `./wordpress/themes/nova-news` và tên thư mục.
-- 404 khi mở bài viết: vào WP-admin → Cài đặt → Đường dẫn tĩnh → Lưu thay đổi.
-- Đổi mật khẩu `.env` sau khi đã tạo `mysql_data` **không đổi mật khẩu MySQL hiện có**; đừng sửa `.env` tùy tiện sau khi khởi tạo.
+Đăng nhập MySQL:
 
-Dừng mà vẫn **giữ dữ liệu**:
+`docker compose exec mysql mysql -u root -p`
 
-```powershell
-docker compose down
-```
+Thực hiện các câu lệnh SQL:
 
-⚠️ **KHÔNG chạy `docker compose down -v` nếu không chủ ý xóa dữ liệu** (xóa các volume MySQL và WordPress).
+`CREATE USER 'nova_exporter'@'%' IDENTIFIED BY 'MAT_KHAU_RIENG' WITH MAX_USER_CONNECTIONS 3;`
 
-## 8. GitHub — lịch sử commit có ý nghĩa
+`GRANT PROCESS, REPLICATION CLIENT, SELECT ON *.* TO 'nova_exporter'@'%';`
 
-Sau khi tự chạy thành công và kiểm tra, làm lần đầu:
+`EXIT;`
 
-```powershell
-git init
-git add .
-git status
-git commit -m "feat: deploy news portal via Nginx with WordPress and MySQL"
-```
+Thay `MAT_KHAU_RIENG` bằng đúng mật khẩu đã đặt trong biến `MYSQL_EXPORTER_PASSWORD`.
 
-Thêm remote bằng URL repository GitHub **của bạn** và push (chỉ làm sau khi bạn đã tạo repository, không tự đặt URL):
+Sau đó khởi động exporter:
 
-```powershell
-git branch -M main
-git remote add origin <URL_REPO_GITHUB_CUA_BAN>
-git push -u origin main
-```
+`docker compose up -d mysql-exporter`
 
-Commit đầu tiên ở trên là **commit 1 - mốc Nginx**, chỉ tạo sau khi kiểm tra website, database và proxy thật sự chạy. Khi tích hợp xong Prometheus/Grafana, tạo **commit 2**; khi tích hợp xong Loki/Promtail, tạo **commit 3**. **Không tạo commit rỗng chỉ để đủ số.**
+### 3.6. Hoàn tất cấu hình
 
-Tên tài khoản GitHub của bạn đã tồn tại, nhưng đề bài yêu cầu tên theo MSSV; nên xác nhận với giảng viên rằng tài khoản đang dùng được chấp nhận. Repo có thể đặt tên chứa MSSV, nhưng tên repo **không tự động thay thế** điều kiện về tên tài khoản.
+- Cài đặt WordPress và kích hoạt theme Nova News.
+- Tạo các danh mục và bài viết hoặc khôi phục dữ liệu từ bản sao lưu riêng.
+- Trong Grafana, thêm Prometheus với URL `http://prometheus:9090`.
+- Thêm Loki với URL `http://loki:3100`.
+- Tạo dashboard giám sát hoặc nhập dashboard JSON đã xuất trước đó.
 
-## 9. Phạm vi repository
+Lưu ý: Repository chứa mã nguồn và cấu hình. Dữ liệu bài viết, ảnh tải lên và dashboard đã tạo trực tiếp trên Grafana được lưu trong Docker volumes, không tự động xuất hiện khi clone repository.
 
-Repository này chỉ quản lý mã nguồn, cấu hình triển khai và tài liệu hướng dẫn chạy. **Ảnh minh chứng và báo cáo môn học được lưu riêng, không đưa vào repository.** Báo cáo sử dụng kết quả kiểm tra thực tế của hệ thống.
+## 4. Địa chỉ truy cập
 
-## 10. Việc chưa có trong mốc 1
+| Thành phần | Địa chỉ |
+|---|---|
+| Website | http://localhost:8080 |
+| WordPress Admin | http://localhost:8080/wp-admin |
+| phpMyAdmin | http://localhost:8081 |
+| Prometheus | http://localhost:9090 |
+| Prometheus Targets | http://localhost:9090/targets |
+| Grafana | http://localhost:3000 |
+| Loki Ready | http://localhost:3100/ready |
 
-- Prometheus, exporters, Grafana dashboards
-- Loki, Promtail, LogQL
-- Thử nghiệm non-root container, giới hạn quyền hệ thống và kiểm thử hardening đầy đủ
-- Gói demo dữ liệu có thể tái tạo ở máy khác, backup/restore, full security review
+## 5. Kiểm tra hệ thống
 
-Các tính năng trên là tiêu chí bắt buộc của đề và sẽ được triển khai ở mốc kế tiếp.
+**Kiểm tra container:**
+
+`docker compose ps`
+
+**Kiểm tra Nginx:**
+
+`docker compose exec nginx nginx -t`
+
+`curl.exe -I http://localhost:8080`
+
+**Kiểm tra Prometheus:**
+
+Mở trang Targets và kiểm tra 4 target `prometheus`, `cadvisor`, `nginx`, `mysql` ở trạng thái UP.
+
+Các truy vấn PromQL:
+
+- `container_memory_working_set_bytes`
+- `nginx_up`
+- `mysql_up`
+
+**Kiểm tra log trong Grafana Explore:**
+
+Truy vấn LogQL:
+
+1. Xem log Nginx: `{service="nginx"}`
+2. Lọc yêu cầu GET: `{service="nginx"} |= "GET"`
+3. Thống kê log: `sum(count_over_time({service="nginx"}[5m]))`
+
+## 6. Bảo mật hệ thống
+
+Các biện pháp đã triển khai:
+
+- Security Headers cơ bản trên Nginx.
+- Ẩn thông tin phiên bản PHP trong HTTP Header.
+- Mạng Docker `database` có `internal: true`.
+- Grafana và Prometheus chạy với UID khác 0.
+- Tài khoản MySQL Exporter chỉ được cấp các quyền phục vụ giám sát.
+- Mật khẩu được quản lý bằng file `.env`, không lưu trực tiếp trong repository.
+
+Hệ thống được xây dựng phục vụ thực hành trên máy cá nhân, chưa cấu hình HTTPS và chưa được hardening đầy đủ cho môi trường production.
+
